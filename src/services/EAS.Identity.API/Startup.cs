@@ -23,12 +23,16 @@ namespace EAS.Identity.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
         public IConfiguration Configuration { get; }
+
+        public Startup(IHostEnvironment hostEnvironment)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(hostEnvironment.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"apssetings.{hostEnvironment.EnvironmentName}.json", true, true)
+                .AddEnvironmentVariables();
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
