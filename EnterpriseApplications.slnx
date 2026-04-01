@@ -1,0 +1,30 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/BuildingBlock/" />
+  <Folder Name="/src/BuildingBlock/Core/">
+    <Project Path="src/building blocks/EAS.Core/EAS.Core.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/" />
+  <Folder Name="/src/Services/Carrinho/">
+    <Project Path="src/services/EAS.Carrinho.API/EAS.Carrinho.API.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/Catalogo/">
+    <Project Path="src/services/EAS.Catalogo.API/EAS.Catalogo.API.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/Cliente/">
+    <Project Path="src/services/EAS.Cliente.API/EAS.Cliente.API.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/Identity/">
+    <Project Path="src/services/EAS.Identity.API/EAS.Identity.API.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/Pagamento/">
+    <Project Path="src/services/EAS.Pagamento.API/EAS.Pagamento.API.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/Pedido/">
+    <Project Path="src/services/EAS.Pedido.API/EAS.Pedido.API.csproj" />
+  </Folder>
+  <Folder Name="/src/Web/" />
+  <Folder Name="/src/Web/MVC/">
+    <Project Path="src/web/EAS.WebApp.MVC/EAS.WebApp.MVC.csproj" />
+  </Folder>
+</Solution>

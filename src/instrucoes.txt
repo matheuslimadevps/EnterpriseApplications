@@ -1,0 +1,3 @@
+building blocks -> blocos de contrução da arquitetura, tudo que é reutilizável, que podemos separar e aplicar no projeto, web/services.
+services -> apis
+web -> aplicação web
