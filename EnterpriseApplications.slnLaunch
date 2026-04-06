@@ -1,0 +1,22 @@
+[
+  {
+    "Name": "Novo Perfil",
+    "Projects": [
+      {
+        "Path": "src\\services\\EAS.Identity.API\\EAS.Identity.API.csproj",
+        "Action": "Start",
+        "DebugTarget": "IIS - Development"
+      },
+      {
+        "Path": "src\\web\\EAS.WebApp.MVC\\EAS.WebApp.MVC.csproj",
+        "Action": "Start",
+        "DebugTarget": "IIS Express"
+      },
+      {
+        "Path": "src\\building blocks\\EAS.Core\\EAS.Core.csproj",
+        "Action": "Start",
+        "DebugTarget": "EAS.Core"
+      }
+    ]
+  }
+]
