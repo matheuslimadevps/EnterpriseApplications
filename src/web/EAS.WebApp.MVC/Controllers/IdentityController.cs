@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EAS.WebApp.MVC.Controllers
 {
-    public class IdentityController : Controller
+    public class IdentityController : MainController
     {
         private readonly IAutenticacaoService _autenticacaoService;
 
@@ -33,13 +33,12 @@ namespace EAS.WebApp.MVC.Controllers
         {
            if(!ModelState.IsValid) return View(usuarioRegistro);
 
-            // API - Registro
             var resposta = await _autenticacaoService.Registro(usuarioRegistro);
 
-            //if (false) return View(usuarioRegistro);
-            await RealizarLogin(resposta);
+            if (ResponsePossuiErros(resposta.ResponseResult)) 
+                return View(usuarioRegistro);
 
-            //Realizar login na APP
+            await RealizarLogin(resposta);
 
             return RedirectToAction("Index", "Home");
         }
@@ -57,12 +56,11 @@ namespace EAS.WebApp.MVC.Controllers
         {
             if (!ModelState.IsValid) return View(usuarioLogin);
 
-            // API - Login
             var resposta = await _autenticacaoService.Login(usuarioLogin);
 
-            //if (false) return View(usuarioLogin);
+            if (ResponsePossuiErros(resposta.ResponseResult))
+                return View(usuarioLogin);
 
-            //Realizar login na APP
             await RealizarLogin(resposta);
 
             return RedirectToAction("Index", "Home");
