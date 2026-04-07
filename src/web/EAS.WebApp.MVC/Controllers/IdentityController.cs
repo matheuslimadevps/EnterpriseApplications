@@ -36,7 +36,8 @@ namespace EAS.WebApp.MVC.Controllers
             // API - Registro
             var resposta = await _autenticacaoService.Registro(usuarioRegistro);
 
-            if (false) return View(usuarioRegistro);
+            //if (false) return View(usuarioRegistro);
+            await RealizarLogin(resposta);
 
             //Realizar login na APP
 

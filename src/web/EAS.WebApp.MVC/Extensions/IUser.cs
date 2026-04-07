@@ -90,5 +90,16 @@ namespace EAS.WebApp.MVC.Extensions
             return claim?.Value;
         }
 
+        public static string GetUserToken(this ClaimsPrincipal principal)
+        {
+            if (principal == null)
+            {
+                throw new ArgumentException(nameof(principal));
+            }
+
+            var claim = principal.FindFirst("JWT");
+            return claim?.Value;
+        }
+
     }
 }

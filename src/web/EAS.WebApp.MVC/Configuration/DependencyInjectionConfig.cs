@@ -1,4 +1,5 @@
-﻿using EAS.WebApp.MVC.Services;
+﻿using EAS.WebApp.MVC.Extensions;
+using EAS.WebApp.MVC.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -12,6 +13,7 @@ namespace EAS.WebApp.MVC.Configuration
             services.AddHttpClient<IAutenticacaoService, AutenticacaoService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IUser, AspNetUser>();
         }
     }
 }
