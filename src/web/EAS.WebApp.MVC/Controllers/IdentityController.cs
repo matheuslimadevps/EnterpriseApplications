@@ -24,6 +24,7 @@ namespace EAS.WebApp.MVC.Controllers
         [Route("nova-conta")]
         public IActionResult Registro()
         {
+            
             return View();
         }
 
@@ -35,7 +36,7 @@ namespace EAS.WebApp.MVC.Controllers
 
             var resposta = await _autenticacaoService.Registro(usuarioRegistro);
 
-            if (ResponsePossuiErros(resposta.ResponseResult)) 
+            if (ResponsePossuiErros(resposta.ResponseResult))
                 return View(usuarioRegistro);
 
             await RealizarLogin(resposta);
@@ -45,31 +46,35 @@ namespace EAS.WebApp.MVC.Controllers
 
         [HttpGet]
         [Route("login")]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(UsuarioLogin usuarioLogin)
+        public async Task<IActionResult> Login(UsuarioLogin usuarioLogin, string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             if (!ModelState.IsValid) return View(usuarioLogin);
 
             var resposta = await _autenticacaoService.Login(usuarioLogin);
 
-            if (ResponsePossuiErros(resposta.ResponseResult))
-                return View(usuarioLogin);
+            if (ResponsePossuiErros(resposta.ResponseResult)) return View(usuarioLogin);
 
             await RealizarLogin(resposta);
 
-            return RedirectToAction("Index", "Home");
+            if(string.IsNullOrEmpty(returnUrl)) return RedirectToAction("Index", "Home");
+
+            return LocalRedirect(returnUrl);
         }
 
         [HttpGet]
         [Route("sair")]
         public async Task<IActionResult> Logout()
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
 
@@ -92,7 +97,7 @@ namespace EAS.WebApp.MVC.Controllers
 
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(),
+                new ClaimsPrincipal(claimsIdentity),
                 authProperties);
         }
 

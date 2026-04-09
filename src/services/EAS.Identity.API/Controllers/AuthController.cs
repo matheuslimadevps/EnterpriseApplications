@@ -36,6 +36,7 @@ namespace EAS.Identity.API.Controllers
         [HttpPost("nova-conta")]
         public async Task<ActionResult> Registrar(UsuarioRegistro usuarioRegistro) 
         {
+
             if (!ModelState.IsValid) return CustomResponse(ModelState);
             
             var user = new IdentityUser 
@@ -63,6 +64,8 @@ namespace EAS.Identity.API.Controllers
         [HttpPost("autenticacao")]
         public async Task<ActionResult> Login(UsuarioLogin usuarioLogin)
         {
+            
+
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var result = await _signInManager.PasswordSignInAsync(usuarioLogin.Email, usuarioLogin.Senha,
@@ -135,7 +138,7 @@ namespace EAS.Identity.API.Controllers
         {
             return new UsuarioRespostaLogin
             {
-                AcessToken = encodedToken,
+                AccessToken = encodedToken,
                 ExpiresIn = TimeSpan.FromHours(_appSettings.ExpiracaoHoras).TotalSeconds,
                 UsuarioToken = new UsuarioToken
                 {

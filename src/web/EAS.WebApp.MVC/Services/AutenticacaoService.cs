@@ -1,7 +1,8 @@
-﻿using EAS.WebApp.MVC.Models;
+﻿using EAS.WebApp.MVC.Extensions;
+using EAS.WebApp.MVC.Models;
+using Microsoft.Extensions.Options;
+using System;
 using System.Net.Http;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace EAS.WebApp.MVC.Services
@@ -10,63 +11,46 @@ namespace EAS.WebApp.MVC.Services
     {
         private readonly HttpClient _httpClient;
 
-        public AutenticacaoService(HttpClient httpClient)
+        public AutenticacaoService(HttpClient httpClient,
+                                        IOptions<AppSettings> settings)
         {
+            httpClient.BaseAddress = new Uri(settings.Value.AutenticacaoUrl);
+
             _httpClient = httpClient;
         }
 
         public async Task<UsuarioRespostaLogin> Login(UsuarioLogin usuarioLogin)
         {
-            var loginContent = new StringContent(
-                JsonSerializer.Serialize(usuarioLogin),
-                Encoding.UTF8,
-                "application/json");
+            var loginContent = ObterConteudo(usuarioLogin);
 
-            var response = await _httpClient.PostAsync("https://localhost:44381/api/identidade/autenticacao", loginContent);
-
-            //para que possamos serializar o objeto, temos que "desligar o case sensitive do text.Json para que as informações sejam lidas"
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-            };
+            var response = await _httpClient.PostAsync("/api/identidade/autenticacao", loginContent);
 
             if (!TratarErrosResponse(response))
             {
                 return new UsuarioRespostaLogin
                 {
-                    ResponseResult = JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), options)
+                    ResponseResult = await DeserializarObjetoResponse<ResponseResult>(response)
                 };
             }
             
-            
-
-            return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync(), options);
+            return await DeserializarObjetoResponse<UsuarioRespostaLogin>(response);
         }
 
         public async Task<UsuarioRespostaLogin> Registro(UsuarioRegistro usuarioRegistro)
         {
-            var registroContent = new StringContent(
-                JsonSerializer.Serialize(usuarioRegistro),
-                Encoding.UTF8,
-                "application/json");
+            var registroContent = ObterConteudo(usuarioRegistro);
 
-            var response = await _httpClient.PostAsync("https://localhost:44381/api/identidade/nova-conta", registroContent);
-
-            //para que possamos serializar o objeto, temos que "desligar o case sensitive do text.Json para que as informações sejam lidas"
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-            };
+            var response = await _httpClient.PostAsync("api/identidade/nova-conta", registroContent);
 
             if (!TratarErrosResponse(response))
             {
                 return new UsuarioRespostaLogin
                 {
-                    ResponseResult = JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), options)
+                    ResponseResult = await DeserializarObjetoResponse<ResponseResult>(response)
                 };
             }
 
-            return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync(), options);
+            return await DeserializarObjetoResponse<UsuarioRespostaLogin>(response);
         }
     }
 }

@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Itens de Solução/">
+    <File Path="global.json" />
+  </Folder>
   <Folder Name="/src/" />
   <Folder Name="/src/BuildingBlock/" />
   <Folder Name="/src/BuildingBlock/Core/">
