@@ -11,6 +11,11 @@
         "Path": "src\\web\\EAS.WebApp.MVC\\EAS.WebApp.MVC.csproj",
         "Action": "Start",
         "DebugTarget": "IIS Express"
+      },
+      {
+        "Path": "src\\services\\EAS.Catalogo.API\\EAS.Catalogo.API.csproj",
+        "Action": "Start",
+        "DebugTarget": "IIS - Dev"
       }
     ]
   }
