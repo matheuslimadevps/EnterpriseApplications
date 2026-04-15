@@ -1,5 +1,5 @@
-﻿using EAS.Identity.API.Extensions;
-using EAS.Identity.API.Models;
+﻿using EAS.Identity.API.Models;
+using EAS.WebAPI.Core.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;

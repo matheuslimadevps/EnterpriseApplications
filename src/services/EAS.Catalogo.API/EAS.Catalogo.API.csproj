@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\building blocks\EAS.Core\EAS.Core.csproj" />
+    <ProjectReference Include="..\..\building blocks\EAS.WebApi.Core\EAS.WebApi.Core.csproj" />
   </ItemGroup>
 
 </Project>

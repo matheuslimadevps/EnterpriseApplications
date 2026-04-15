@@ -7,6 +7,9 @@
   <Folder Name="/src/BuildingBlock/Core/">
     <Project Path="src/building blocks/EAS.Core/EAS.Core.csproj" />
   </Folder>
+  <Folder Name="/src/BuildingBlock/Services/">
+    <Project Path="src/building blocks/EAS.WebApi.Core/EAS.WebApi.Core.csproj" Id="48929e48-5d71-4150-86a9-4b9b2f5b3fec" />
+  </Folder>
   <Folder Name="/src/Services/" />
   <Folder Name="/src/Services/Carrinho/">
     <Project Path="src/services/EAS.Carrinho.API/EAS.Carrinho.API.csproj" />

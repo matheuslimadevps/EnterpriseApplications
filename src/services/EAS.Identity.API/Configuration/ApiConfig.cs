@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using EAS.WebApi.Core.Identity;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,9 +25,9 @@ namespace EAS.Identity.API.Configuration
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            //aqui chamamos o IdentityConfiguration pois ele precisa estar entre o routing e os endpoints por funcionamento
+            //aqui chamamos o AuthConfiguration(método reutilizado de Core) pois ele precisa estar entre o routing e os endpoints por funcionamento
             //próprio do ASP.NET
-            app.UseIdentityConfiguration();
+            app.UseAuthConfiguration();
 
             //O método abaixo percorre todas as classes que herdam de controller
             //e criar os endpoints para todas elas

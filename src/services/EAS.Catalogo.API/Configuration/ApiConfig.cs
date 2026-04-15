@@ -1,4 +1,5 @@
 ﻿using EAS.Catalogo.API.Data;
+using EAS.WebApi.Core.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,8 @@ namespace EAS.Catalogo.API.Configuration
             app.UseRouting();
 
             app.UseCors("Total");
+
+            app.UseAuthConfiguration();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,4 +1,4 @@
-﻿namespace EAS.Identity.API.Extensions
+﻿namespace EAS.WebAPI.Core.Identity
 {
     public class AppSettings
     {
