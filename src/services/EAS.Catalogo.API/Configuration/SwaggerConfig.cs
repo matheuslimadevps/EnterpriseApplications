@@ -9,6 +9,7 @@ namespace EAS.Catalogo.API.Configuration
     {
         public static void AddSwaggerConfiguration(this IServiceCollection services)
         {
+            //configuração feita no swagger para que ao tornar o acesso restrito, exigir o Bearer com o token para que seja permitido acessar os métodos restritos.
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -17,6 +18,31 @@ namespace EAS.Catalogo.API.Configuration
                     Description = "API a nível didático para o curso ASP.NET Core Enterprise Applications",
                     Contact = new OpenApiContact() { Name = "Matheus Lima", Email = "matheushenriquedelima614@gmail.com" },
                     License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/license/mit-0") }
+                });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "Insira o token JWT desta maneira: Bearer {seu token}",
+                    Name = "Authorization",
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    { 
+                        new OpenApiSecurityScheme
+                        { 
+                            Reference = new OpenApiReference
+                            { 
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[]{ }
+                    }
                 });
             });
         }
